@@ -2,16 +2,20 @@ package dl.dai.heig.items;
 
 import java.util.List;
 
-public record Item(
-    String id,
-    String name,
-    dl.dai.heig.items.Item.Type type,
-    List<Statistic> statistics,
-    String description,
-    List<ItemPool> itemPools,
-    int quality,
-    List<GameVersion> gameVersions,
-    String note) {
+public class Item {
+  public String id;
+  public String name;
+  public dl.dai.heig.items.Item.Type type;
+  public List<Statistic> statistics;
+  public String description;
+  public List<ItemPool> itemPools;
+  public Integer quality;
+  public List<GameVersion> gameVersions;
+  public String note;
+
+  public Item() {
+  }
+
   public enum ItemPool {
     AngelRoom,
     BabyShop,
@@ -67,7 +71,7 @@ public record Item(
 
     String spindownId = "c" + spindownIdNumber;
 
-    return allItems.stream().filter(item -> item.id().equals(spindownId)).findFirst().orElse(null);
+    return allItems.stream().filter(item -> item.id.equals(spindownId)).findFirst().orElse(null);
   }
 
   @Override

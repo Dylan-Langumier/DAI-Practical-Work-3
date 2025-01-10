@@ -1,27 +1,27 @@
 package dl.dai.heig.items;
 
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ItemFilter {
   public enum FilterType {
     STATISTIC_TYPE,
     ITEM_POOL,
-    ITEM_ID,
     QUALITY,
   }
 
-  public static List<Item> filterItems(List<Item> items, FilterType filterType, Object criteria) {
-    return items.stream().filter(item -> matchesCriteria(item, filterType, criteria)).toList();
+  public static Map<String, Item> filterItems(Map<String, Item> items, FilterType filterType, Object criteria) {
+    return items.entrySet().stream().filter(item -> matchesCriteria(item.getValue(), filterType, criteria)).
+            collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
   private static boolean matchesCriteria(Item item, FilterType filterType, Object criteria) {
     return switch (filterType) {
-      case STATISTIC_TYPE -> item.statistics().stream().anyMatch(stat -> stat.type() == criteria);
+      case STATISTIC_TYPE -> item.statistics.stream().anyMatch(stat -> stat.type() == criteria);
       case ITEM_POOL ->
-          item.itemPools().stream()
+          item.itemPools.stream()
               .anyMatch(pool -> pool == Item.ItemPool.valueOf(criteria.toString()));
-      case ITEM_ID -> item.id().equalsIgnoreCase(criteria.toString());
-      case QUALITY -> item.quality() == (int) criteria;
+      case QUALITY -> item.quality == (int) criteria;
     };
   }
 }

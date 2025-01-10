@@ -1,49 +1,88 @@
-[
-  {
+{
+  "c1": {
     "id": "c1",
     "name": "The Sad Onion",
     "type": "Passive",
-    "itemPools": ["TreasureRoom", "CraneGame"],
-    "statistics": [{ "type": "TearRate", "value": "+0.7" }],
+    "itemPools": [
+      "TreasureRoom",
+      "CraneGame"
+    ],
+    "statistics": [
+      {
+        "type": "TearRate",
+        "value": "+0.7"
+      }
+    ],
     "description": "Tears Up",
     "quality": 3,
-    "gameVersions": ["All"]
+    "gameVersions": [
+      "All"
+    ]
   },
-  {
+  "c2": {
     "id": "c2",
     "name": "The Inner Eye",
     "type": "Passive",
-    "itemPools": ["TreasureRoom"],
+    "itemPools": [
+      "TreasureRoom"
+    ],
     "statistics": [
-      { "type": "TearRate", "value": "-49%" },
-      { "type": "TearAmount", "value": "x3"}
+      {
+        "type": "TearRate",
+        "value": "-49%"
+      },
+      {
+        "type": "TearAmount",
+        "value": "x3"
+      }
     ],
     "description": "Triple shot",
     "quality": 2,
-    "gameVersions": ["All"]
+    "gameVersions": [
+      "All"
+    ]
   },
-  {
+  "c3": {
     "id": "c3",
     "name": "Spoon Bender",
     "type": "Passive",
-    "itemPools": ["TreasureRoom"],
-    "statistics": [{ "type": "TearEffect", "value": "Homing tears" }],
+    "itemPools": [
+      "TreasureRoom"
+    ],
+    "statistics": [
+      {
+        "type": "TearEffect",
+        "value": "Homing tears"
+      }
+    ],
     "description": "Homing shots",
     "quality": 3,
-    "gameVersions": ["All"]
+    "gameVersions": [
+      "All"
+    ]
   },
-  {
+  "c4": {
     "id": "c4",
     "name": "Cricket's Head",
     "type": "Passive",
-    "itemPools": ["TreasureRoom"],
+    "itemPools": [
+      "TreasureRoom"
+    ],
     "statistics": [
-      { "type": "Damage", "value": "+0.5" },
-      { "type": "Damage", "value": "x1.5" }
+      {
+        "type": "Damage",
+        "value": "+0.5"
+      },
+      {
+        "type": "Damage",
+        "value": "x1.5"
+      }
     ],
     "description": "DMG up",
     "quality": 4,
-    "gameVersions": ["All"],
+    "gameVersions": [
+      "All"
+    ],
     "note": "This item was known as Max's Head in the Flash version"
   }
-]
+}
