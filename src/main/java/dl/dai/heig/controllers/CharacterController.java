@@ -25,7 +25,7 @@ public class CharacterController {
         // Get the last known modification date of the item
         LocalDateTime lastKnownModification = ctx.headerAsClass("If-Modified-Since", LocalDateTime.class).getOrDefault(null);
         // Check if the item has been modified since the last known modification date
-        if (lastKnownModification != null && charactersCache.get(id).equals(lastKnownModification)) {
+        if (lastKnownModification != null &&  charactersCache.containsKey(id) && charactersCache.get(id).equals(lastKnownModification)) {
             throw new NotModifiedResponse();
         }
         Character character = characters.get(id);
@@ -155,17 +155,11 @@ public class CharacterController {
         characters.put(id, character);
 
         LocalDateTime now;
-        if (charactersCache.containsKey(Integer.valueOf(character.id))) {
-            // If it is already in the cache, get the last modification date
-            now = charactersCache.get(Integer.valueOf(character.id));
-        }else{
-            // Otherwise, set to the current date
-            now = LocalDateTime.now();
-            charactersCache.put(Integer.valueOf(character.id), now);
-
-            // Invalidate the cache for all items
-            charactersCache.remove(RESERVED_ID_TO_IDENTIFY_ALL_CHARACTERS);
-        }
+        // Otherwise, set to the current date
+        now = LocalDateTime.now();
+        charactersCache.put(Integer.valueOf(character.id), now);
+        // Invalidate the cache for all items
+        charactersCache.remove(RESERVED_ID_TO_IDENTIFY_ALL_CHARACTERS);
         // Add the last modification date to the response
         ctx.header("Last-Modified", String.valueOf(now));
         ctx.json(character);

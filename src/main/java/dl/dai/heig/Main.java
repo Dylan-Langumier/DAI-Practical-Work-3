@@ -47,9 +47,10 @@ public class Main {
       app.get("/items/quality/{quality}", itemController::filterByQuality);
       app.get("/items/pool/{pool}", itemController::filterByPool);
       app.get("/items/d6", itemController::getRandomOne);
-      app.get("/items/d6/{pool}", itemController::getRandomOneByPool);
-      app.get("/items/d6/{quality}", itemController::getRandomOneByQuality);
+      app.get("/items/d6/pool/{pool}", itemController::getRandomOneByPool);
+      app.get("/items/d6/quality/{quality}", itemController::getRandomOneByQuality);
       app.get("/item/{id}", itemController::getOne);
+      app.get("/item/spindown/{id}", itemController::spindownItem);
 
       app.post("/items", itemController::create);
 
@@ -59,7 +60,7 @@ public class Main {
       // CHARACTER ENDPOINTS
       app.get("/characters", characterController::getMany);
       app.get("/character/{id}", characterController::getOne);
-      app.post("/characters", itemController::create);
+      app.post("/characters", characterController::create);
       app.patch("/character/{id}", characterController::update);
       app.delete("/character/{id}" ,characterController::delete);
 

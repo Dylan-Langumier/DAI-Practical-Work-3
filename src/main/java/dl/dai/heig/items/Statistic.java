@@ -2,6 +2,7 @@ package dl.dai.heig.items;
 
 public record Statistic(Type type, String value, Item.GameVersion[] gameVersions) {
   public enum Type {
+    Damage,
     Speed,
     Tears,
     Attack,

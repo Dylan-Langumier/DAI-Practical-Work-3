@@ -61,19 +61,6 @@ public class Item {
     Trinket,
   }
 
-  public Item getSpindown(List<Item> allItems) {
-    int currentIdNumber = Integer.parseInt(id.substring(1));
-    int spindownIdNumber = currentIdNumber - 1;
-
-    if (spindownIdNumber < 1) {
-      return null;
-    }
-
-    String spindownId = "c" + spindownIdNumber;
-
-    return allItems.stream().filter(item -> item.id.equals(spindownId)).findFirst().orElse(null);
-  }
-
   @Override
   public String toString() {
     return "Item{"
