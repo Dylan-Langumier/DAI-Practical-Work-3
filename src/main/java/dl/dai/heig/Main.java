@@ -8,6 +8,8 @@ import dl.dai.heig.controllers.CharacterController;
 import dl.dai.heig.controllers.ItemController;
 import dl.dai.heig.items.Item;
 import io.javalin.Javalin;
+import io.javalin.http.NotFoundResponse;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;

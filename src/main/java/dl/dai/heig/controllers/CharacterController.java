@@ -96,8 +96,12 @@ public class CharacterController {
         character.luck = createCharacter.luck;
         character.startingPickups = createCharacter.startingPickups;
         character.startingItems = createCharacter.startingItems;
-        characters.put(Integer.valueOf(character.id), character);
 
+        if(characters.containsKey(character.id)){
+            throw new ConflictResponse();
+        }
+
+        characters.put(Integer.valueOf(character.id), character);
         // Store the last modification date of the item
         LocalDateTime now = LocalDateTime.now();
         charactersCache.put(Integer.valueOf(character.id), now);

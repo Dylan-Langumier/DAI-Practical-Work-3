@@ -180,6 +180,9 @@ public class ItemController {
         item.quality = createItem.quality;
         item.gameVersions = createItem.gameVersions;
         item.note = createItem.note;
+        if(items.containsKey(item.id)){
+            throw new ConflictResponse();
+        }
         items.put(item.id, item);
 
         // Store the last modification date of the item

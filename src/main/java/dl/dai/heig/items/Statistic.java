@@ -18,10 +18,4 @@ public record Statistic(Type type, String value, Item.GameVersion[] gameVersions
     TearRate,
     TearSize
   }
-
-  @Override
-  public String toString() {
-    String gameVer = gameVersion == null ? "" : " (" + gameVersion + ")";
-    return type + ": " + value + gameVer;
-  }
 }
