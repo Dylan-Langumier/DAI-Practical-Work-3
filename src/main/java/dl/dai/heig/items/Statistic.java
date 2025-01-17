@@ -1,19 +1,22 @@
 package dl.dai.heig.items;
 
-public record Statistic(Type type, String value, Item.GameVersion gameVersion) {
+public record Statistic(Type type, String value, Item.GameVersion[] gameVersions) {
   public enum Type {
     Speed,
-    TearRate,
+    Tears,
     Attack,
     Range,
     ShotSpeed,
     Luck,
+    Size,
     DevilDealChance,
     AngelDealChance,
     PlanetariumChance,
     Health,
     TearAmount,
-    TearEffect
+    TearEffect,
+    TearRate,
+    TearSize
   }
 
   @Override

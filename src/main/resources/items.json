@@ -3,21 +3,11 @@
     "id": "c1",
     "name": "The Sad Onion",
     "type": "Passive",
-    "itemPools": [
-      "TreasureRoom",
-      "CraneGame"
-    ],
-    "statistics": [
-      {
-        "type": "TearRate",
-        "value": "+0.7"
-      }
-    ],
+    "itemPools": ["TreasureRoom", "CraneGame"],
+    "statistics": [{ "type": "Tears", "value": "+0.7" }],
     "description": "Tears Up",
     "quality": 3,
-    "gameVersions": [
-      "All"
-    ]
+    "gameVersions": ["Flash"]
   },
   "c2": {
     "id": "c2",
@@ -27,20 +17,12 @@
       "TreasureRoom"
     ],
     "statistics": [
-      {
-        "type": "TearRate",
-        "value": "-49%"
-      },
-      {
-        "type": "TearAmount",
-        "value": "x3"
-      }
+      { "type": "Tears", "value": "-49%" },
+      { "type": "TearAmount", "value": "x3"}
     ],
     "description": "Triple shot",
     "quality": 2,
-    "gameVersions": [
-      "All"
-    ]
+    "gameVersions": ["Flash"]
   },
   "c3": {
     "id": "c3",
@@ -57,11 +39,9 @@
     ],
     "description": "Homing shots",
     "quality": 3,
-    "gameVersions": [
-      "All"
-    ]
+    "gameVersions": ["Flash"]
   },
-  "c4": {
+  "c4" : {
     "id": "c4",
     "name": "Cricket's Head",
     "type": "Passive",
@@ -80,9 +60,335 @@
     ],
     "description": "DMG up",
     "quality": 4,
-    "gameVersions": [
-      "All"
+    "gameVersions": ["Flash"],
+    "note": "This item was known as Max's Head in the Flash version. Damage mult doesn't stack with Magic Mushroom or Strength card."
+  },
+  "c5": {
+    "id": "c5",
+    "name": "My Reflection",
+    "type": "Passive",
+    "itemPools": ["CraneGame", "TreasureRoom"],
+    "statistics": [
+      { "type": "ShotSpeed", "value": "x1.6" },
+      { "type": "Range", "value": "+1.5"},
+      { "type": "Range", "value": "x2", "gameVersions": ["Repentance", "RepentancePlus"]},
+      { "type": "TearEffect", "value": "Tear Falling Speed +1", "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]  },
+      { "type": "Luck", "value": "-1", "gameVersions": ["Repentance", "RepentancePlus"]},
+      { "type": "Damage", "value": "+1.5", "gameVersions": ["Repentance", "RepentancePlus"]}
     ],
-    "note": "This item was known as Max's Head in the Flash version"
+    "description": "Boomerang tears + DMG up + luck down",
+    "quality": 2,
+    "gameVersions": ["Flash"]
+  },
+  "c6": {
+    "id": "c6",
+    "name": "Number One",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [
+      { "type": "Tears", "value": "+1.5" },
+      { "type": "Range", "value": "-17.62", "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]},
+      { "type": "Range", "value": "x0.8", "gameVersions": ["Repentance", "RepentancePlus"]},
+      { "type": "Range", "value": "-1.5", "gameVersions": ["Repentance", "RepentancePlus"]},
+      { "type": "TearEffect", "value": "Tear falling speed +0.76", "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]}
+    ],
+    "description": "Tears up + range down",
+    "quality": 2,
+    "gameVersions": ["Flash"],
+    "note": "In Repentance and RepentancePlus, the range down effects will not reduce range below 4."
+  },
+  "c7": {
+    "id": "c7",
+    "name": "Blood of the Martyr",
+    "type": "Passive",
+    "itemPools": ["AngelRoom", "WoodenChest", "TreasureRoom"],
+    "statistics": [{ "type": "Damage", "value": "+1 " }],
+    "description": "Dmg Up",
+    "quality": 3,
+    "gameVersions": ["Flash"]
+  },
+  "c8": {
+    "id": "c8",
+    "name": "Brother Bobby",
+    "type": "Passive",
+    "itemPools": ["BabyShop", "DevilRoom", "TreasureRoom"],
+    "statistics": [],
+    "description": "Friends 'till the end",
+    "quality": 1,
+    "gameVersions": ["Flash"],
+    "note": "Spawns a familiar that follows Isaac around shooting tears that deal 3.5 damage."
+  },
+  "c9": {
+    "id": "c9",
+    "name": "Skatole",
+    "type": "Passive",
+    "itemPools": ["ShellGame"],
+    "statistics": [],
+    "description": "Fly Love",
+    "quality": 0,
+    "gameVersions": ["Flash"],
+    "note": "A lot of fly enemies are no longer aggressive towards Isaac."
+  },
+  "c10": {
+    "id": "c10",
+    "name": "Halo of Flies",
+    "type": "Passive",
+    "itemPools": ["BabyShop", "KeyMaster", "TreasureRoom"],
+    "statistics": [],
+    "description": "Projectile protection",
+    "quality": 2,
+    "gameVersions": ["Flash"],
+    "note": "Spawns two Pretty Flies that block enemy shots."
+  },
+  "c11": {
+    "id": "c11",
+    "name": "1up!",
+    "type": "Passive",
+    "itemPools": ["SecretRoom"],
+    "statistics": [],
+    "description": "Extra life",
+    "quality": 2,
+    "gameVersions": ["Flash"],
+    "note": "Gives Isaac an extra life."
+  },
+  "c12": {
+    "id": "c12",
+    "name": "Magic Mushroom",
+    "type": "Passive",
+    "itemPools": ["Boss", "TreasureRoom", "UltraSecretRoom"],
+    "statistics": [
+      { "type": "Health", "value": "+1 Heart container"},
+      { "type": "Health", "value": "Full health"},
+      { "type": "Size", "value": "Size up"},
+      { "type": "Speed", "value": "+0.3"},
+      { "type": "Damage", "value": "+0.3"},
+      { "type": "Damage", "value": "*1.5"},
+      { "type": "TearEffect", "value": "Tear falling speed +0.5", "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]},
+      { "type": "Range", "value": "+5.25", "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]},
+      { "type": "Range", "value": "+2.5", "gameVersions": ["Repentance", "RepentancePlus"]}
+    ],
+    "description": "All stats up!",
+    "quality": 4,
+    "gameVersions": ["Flash"],
+    "note": "Damage mult doesn't stack with Cricket's Head or Strength card."
+  },
+  "c13": {
+    "id": "c13",
+    "name": "The Virus",
+    "type": "Passive",
+    "itemPools": ["SecretRoom"],
+    "statistics": [{ "type": "Speed", "value": "+0.2"}],
+    "description": "Extra life",
+    "quality": 2,
+    "gameVersions": ["Flash"],
+    "note": "Enemy touching you take 12 damage and get poisoned."
+  },
+  "c221": {
+    "id": "c221",
+    "name": "Rubber Cement",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [{"type": "TearEffect", "value": "Bouncing Tears"}],
+    "description": "Bouncing tears",
+    "quality": 3,
+    "gameVersions": ["Rebirth"]
+  },
+  "c222": {
+    "id": "c222 ",
+    "name": "Anti-Gravity",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [{"type": "TearRate", "value": "+1"}],
+    "description": "Anti-gravity tears + tears up",
+    "quality": 1,
+    "gameVersions": ["Rebirth"],
+    "note": "Holding the fire buttons causes tears to hover in midair. When released, the tears will all shoot in the direction they were originally fired."
+  },
+  "c223": {
+    "id": "c223",
+    "name": "Pyromaniac",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [],
+    "description": "It hurts so good +5 bombs",
+    "quality": 4,
+    "gameVersions": ["Rebirth"],
+    "note": "+5 bombs. All explosions heal Isaac instead of hurting him."
+  },
+  "c224": {
+    "id": "c224",
+    "name": "Cricket's Body",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [
+      { "type": "TearSize", "value": "x1.2",  "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]},
+      { "type": "TearSize", "value": "+0.1", "gameVersions": ["Repentance", "RepentancePlus"]},
+      { "type": "Range", "value": "-10",  "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]},
+      { "type": "Range", "value": "x0.8", "gameVersions": ["Repentance", "RepentancePlus"]},
+      { "type": "TearRate", "value": "+0.5"}
+    ],
+    "description": "Bursting shots + tears up",
+    "quality": 3,
+    "gameVersions": ["Rebirth"],
+    "note": "Makes tears break into 4 smaller tears on impact with anything, which deal half of your damage."
+  },
+  "c358": {
+    "id": "c358",
+    "name": "8 Inch Nails",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [{"type": "Damage", "value": "+1.5"}],
+    "description": "Stick it to 'em!",
+    "quality": 3,
+    "gameVersions": ["Afterbirth"],
+    "note": "Increased knockback."
+  },
+  "c359": {
+    "id": "c359",
+    "name": "Incubus",
+    "type": "Passive",
+    "itemPools": ["BabyShop", "DevilRoom"],
+    "statistics": [],
+    "description": "Dark friend",
+    "quality": 4,
+    "gameVersions": ["Afterbirth"],
+    "note": "Gives you a familiar demon incubus that follows you and shoots tears exactly the same as Isaac's in terms of damage, stats and also effects."
+  },
+  "c360": {
+    "id": "c360",
+    "name": "Fate's Reward",
+    "type": "Passive",
+    "itemPools": ["BabyShop", "TreasureRoom"],
+    "statistics": [],
+    "description": "Your fate beside you",
+    "quality": 2,
+    "gameVersions": ["Afterbirth"],
+    "note": "A familiar blue head that will follow Isaac and fire tears copying his tear damage."
+  },
+  "c361": {
+    "id": "c361",
+    "name": "Lil Chest",
+    "type": "Passive",
+    "itemPools": ["CraneGame", "WoodenChest", "Beggar", "TreasureRoom"],
+    "statistics": [],
+    "description": "What's in the box?",
+    "quality": 2,
+    "gameVersions": ["Afterbirth"],
+    "note": "A familiar chest that follows Isaac and has a 25% chance to drop a pickup after clearing a room."
+  },
+  "c362": {
+    "id": "c362",
+    "name": "Sworn Protector",
+    "type": "Passive",
+    "itemPools": ["BabyShop", "AngelRoom"],
+    "statistics": [],
+    "description": "Protective friend",
+    "quality": 3,
+    "gameVersions": ["Afterbirth"],
+    "note": "An orbital angel which does 7 contact damage per tick and blocks shots."
+  },
+  "c531": {
+    "id": "c531",
+    "name": "Haemolacria",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom", "UltraSecretRoom"],
+    "statistics": [
+      { "type": "Damage", "value": "x1.31~",  "gameVersions": ["Flash", "Rebirth", "Afterbirth", "AfterbirthPlus"]},
+      { "type": "Damage", "value": "+1", "gameVersions": ["Repentance", "RepentancePlus"] },
+      { "type": "Damage", "value": "x1.5", "gameVersions": ["Repentance", "RepentancePlus"] },
+      { "type": "Range", "value": "x0.8", "gameVersions": ["Repentance", "RepentancePlus"] },
+      { "type": "Tears", "value": "Tear delay * 2 / 10", "gameVersions": ["Repentance", "RepentancePlus"] }
+    ],
+    "description": "I'm seeing red...",
+    "quality": 4,
+    "gameVersions": ["AfterbirthPlus"],
+    "note": "Tears split into multiple smaller tears on landing or on touching an enemy."
+  },
+  "c532": {
+    "id": "c532",
+    "name": "Lachryphagy",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [],
+    "description": "Feed them!",
+    "quality": 3,
+    "gameVersions": ["AfterbirthPlus"],
+    "note": "Tears slow down over time while moving across the room, and upon stopping completely or hitting an object will burst into 8 smaller tears. Tears shot into floating tears also feed them, increasing their damage."
+  },
+  "c533": {
+    "id": "c533",
+    "name": "Trisagion",
+    "type": "Passive",
+    "itemPools": ["AngelRoom"],
+    "statistics": [{"type": "TearEffect", "value": "Tears are replaced with piercing white blasts of light"}],
+    "description": "Smite thy enemy",
+    "quality": 3,
+    "gameVersions": ["AfterbirthPlus"],
+    "note": "Tears deal roughly 33% of your usual tear damage, however due to the size of the holy flash it is likely to hit enemies multiple times."
+  },
+  "c534": {
+    "id": "c534",
+    "name": "Schoolbag",
+    "type": "Passive",
+    "itemPools": ["GoldenChest", "Shop"],
+    "statistics": [],
+    "description": "Extra active item room",
+    "quality": 3,
+    "gameVersions": ["AfterbirthPlus"],
+    "note": "Allows Isaac to hold 2 active items."
+  },
+  "c535": {
+    "id": "c535",
+    "name": "Blanket",
+    "type": "Passive",
+    "itemPools": ["Shop"],
+    "statistics": [],
+    "description": "You feel Safe",
+    "quality": 2,
+    "gameVersions": ["AfterbirthPlus"],
+    "note": "+1 soul heart, heals 1 red heart. Entering a Boss Room grants Holy Mantle effect."
+  },
+  "c677": {
+    "id": "c677",
+    "name": "Astral Projection",
+    "type": "Passive",
+    "itemPools": ["SecretRoom", "TreasureRoom"],
+    "statistics": [],
+    "description": "The true out-of-body experience!",
+    "quality": 2,
+    "gameVersions": ["Repentance"],
+    "note": "Upon first damage taken, stop time for 2 seconds and Isaac is turned into a ghost with spectral tears and flying. Goes back to normal upon taking 2 hits or clearing room."
+  },
+  "c678": {
+    "id": "c678",
+    "name": "C Section",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom", "UltraSecretRoom"],
+    "statistics": [{"type": "TearEffect", "value": "Tears are replaced with piercing homing spectral fetus"}],
+    "description": "Fetus shots",
+    "quality": 4,
+    "gameVersions": ["Repentance"]
+  },
+  "c679": {
+    "id": "c679",
+    "name": "Lil Abaddon",
+    "type": "Passive",
+    "itemPools": ["BabyShop", "DevilRoom"],
+    "statistics": [],
+    "description": "Abyssal friend",
+    "quality": 2,
+    "gameVersions": ["Repentance"],
+    "note": "Gives you a familiar that can be charged up to release a black ring, that damages any enemies that touch it with rapid hits."
+  },
+  "c670": {
+    "id": "c670",
+    "name": "Montezuma's Revenge",
+    "type": "Passive",
+    "itemPools": ["TreasureRoom"],
+    "statistics": [],
+    "description": "Oh no...",
+    "quality": 2,
+    "gameVersions": ["Repentance"],
+    "note": "While firing tears, you now charge up a poop attack for 3 seconds that when released, fires from Isaac's behind."
   }
 }
