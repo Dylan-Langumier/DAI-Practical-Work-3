@@ -10,9 +10,11 @@ public class ItemFilter {
     QUALITY,
   }
 
-  public static Map<String, Item> filterItems(Map<String, Item> items, FilterType filterType, Object criteria) {
-    return items.entrySet().stream().filter(item -> matchesCriteria(item.getValue(), filterType, criteria)).
-            collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+  public static Map<String, Item> filterItems(
+      Map<String, Item> items, FilterType filterType, Object criteria) {
+    return items.entrySet().stream()
+        .filter(item -> matchesCriteria(item.getValue(), filterType, criteria))
+        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
   private static boolean matchesCriteria(Item item, FilterType filterType, Object criteria) {

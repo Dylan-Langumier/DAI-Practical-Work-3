@@ -13,8 +13,7 @@ public class Item {
   public List<GameVersion> gameVersions;
   public String note;
 
-  public Item() {
-  }
+  public Item() {}
 
   public enum ItemPool {
     AngelRoom,
