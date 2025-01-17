@@ -16,7 +16,7 @@ public class ItemController {
     private final ConcurrentHashMap<String,LocalDateTime> itemsCache;
 
     // This is a magic number used to store the items' list last modification date
-    // As the ID for items starts from 1, it is safe to reserve the value -1 for all items
+    // As the ID for items will never be All Items, it is safe to reserve the value All Items for all items
     private final String RESERVED_ID_TO_IDENTIFY_ALL_ITEMS = "All Items";
 
     public ItemController(ConcurrentHashMap<String, Item> items, ConcurrentHashMap<String,LocalDateTime> itemsCache) {
