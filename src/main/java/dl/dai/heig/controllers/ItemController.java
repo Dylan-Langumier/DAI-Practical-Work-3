@@ -9,26 +9,50 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 public class ItemController {
     private final ConcurrentHashMap<String, Item> items;
+    private final ConcurrentHashMap<String,LocalDateTime> itemsCache;
 
-    public ItemController(ConcurrentHashMap<String, Item> items) {
+    // This is a magic number used to store the items' list last modification date
+    // As the ID for items starts from 1, it is safe to reserve the value -1 for all items
+    private final String RESERVED_ID_TO_IDENTIFY_ALL_ITEMS = "All Items";
+
+    public ItemController(ConcurrentHashMap<String, Item> items, ConcurrentHashMap<String,LocalDateTime> itemsCache) {
         this.items = items;
+        this.itemsCache = itemsCache;
     }
 
     public void getOne(Context ctx) {
         String id = ctx.pathParam("id");
+        // Get the last known modification date of the item
+        LocalDateTime lastKnownModification = ctx.headerAsClass("If-Modified-Since", LocalDateTime.class).getOrDefault(null);
+        // Check if the item has been modified since the last known modification date
+        if (lastKnownModification != null && itemsCache.get(id).equals(lastKnownModification)) {
+            throw new NotModifiedResponse();
+        }
         Item item = items.get(id);
 
         if (item == null) {
             throw new NotFoundResponse();
         }
 
+        LocalDateTime now;
+        if(itemsCache.containsKey(item.id)){
+            // If it is already in the cache, get the last modification date
+            now = itemsCache.get(item.id);
+        }else{
+            // Otherwise, set to the current date
+            now = LocalDateTime.now();
+            itemsCache.put(item.id, now);
+        }
+        // Add the last modification date to the response
+        ctx.header("Last-Modified", String.valueOf(now));
         ctx.json(item);
     }
 
+    // Cache is not possible here, because we don't have an id to check if the user already has it in their cache.
     public void getRandomOne(Context ctx) {
         Random rand = new Random();
         int d6 = rand.nextInt(items.size());
@@ -37,6 +61,7 @@ public class ItemController {
         ctx.json(items.get(keysAsArray.get(d6)));
     }
 
+    // Cache is not possible here, because we don't have an id to check if the user already has it in their cache.
     public void getRandomOneByPool(Context ctx) {
         String pool = ctx.pathParam("pool");
         Random rand = new Random();
@@ -48,19 +73,79 @@ public class ItemController {
     }
 
     public void getMany(Context ctx) {
+        // Get the last known modification date of all items
+        LocalDateTime lastKnownModification = ctx.headerAsClass("If-Modified-Since", LocalDateTime.class).getOrDefault(null);
+        // Check if all items have been modified since the last known modification date
+        if (lastKnownModification != null
+                && itemsCache.containsKey(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS)
+                && itemsCache.get(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS).equals(lastKnownModification)){
+            throw new NotModifiedResponse();
+        }
+        LocalDateTime now;
+        if (itemsCache.containsKey(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS)) {
+            // If it is already in the cache, get the last modification date
+            now = itemsCache.get(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS);
+        }else{
+            // Otherwise, set to the current date
+            now = LocalDateTime.now();
+            itemsCache.put(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS, now);
+        }
+        // Add the last modification date to the response
+        ctx.header("Last-Modified", String.valueOf(now));
         ctx.json(items.values());
     }
 
     public void filterByQuality(Context ctx) {
-        Integer quality = ctx.pathParamAsClass("quality", Integer.class).get();
 
+        // Get the last known modification date of all items
+        LocalDateTime lastKnownModification = ctx.headerAsClass("If-Modified-Since", LocalDateTime.class).getOrDefault(null);
+        // Check if all items have been modified since the last known modification date
+        if (lastKnownModification != null
+                && itemsCache.containsKey(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS)
+                && itemsCache.get(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS).equals(lastKnownModification)){
+            throw new NotModifiedResponse();
+        }
+
+        Integer quality = ctx.pathParamAsClass("quality", Integer.class).get();
         Map<String, Item> filter = ItemFilter.filterItems(items, ItemFilter.FilterType.QUALITY, quality);
+
+        LocalDateTime now;
+        if (itemsCache.containsKey(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS)) {
+            // If it is already in the cache, get the last modification date
+            now = itemsCache.get(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS);
+        }else{
+            // Otherwise, set to the current date
+            now = LocalDateTime.now();
+            itemsCache.put(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS, now);
+        }
+
+
         ctx.json(filter);
     }
 
     public void filterByPool(Context ctx) {
+        // Get the last known modification date of all items
+        LocalDateTime lastKnownModification = ctx.headerAsClass("If-Modified-Since", LocalDateTime.class).getOrDefault(null);
+        // Check if all items have been modified since the last known modification date
+        if (lastKnownModification != null
+                && itemsCache.containsKey(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS)
+                && itemsCache.get(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS).equals(lastKnownModification)){
+            throw new NotModifiedResponse();
+        }
+
         String pool = ctx.pathParam("pool");
         Map<String,Item> filter = ItemFilter.filterItems(items,ItemFilter.FilterType.ITEM_POOL,pool);
+
+        LocalDateTime now;
+        if (itemsCache.containsKey(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS)) {
+            // If it is already in the cache, get the last modification date
+            now = itemsCache.get(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS);
+        }else{
+            // Otherwise, set to the current date
+            now = LocalDateTime.now();
+            itemsCache.put(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS, now);
+        }
+
         ctx.json(filter);
     }
 
@@ -87,12 +172,30 @@ public class ItemController {
         item.note = createItem.note;
         items.put(item.id, item);
 
+        // Store the last modification date of the item
+        LocalDateTime now = LocalDateTime.now();
+        itemsCache.put(item.id, now);
+
+        // Invalidate the cache for all items
+        itemsCache.remove(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS);
+
         ctx.status(HttpStatus.CREATED);
+
+        // Add the last modification date to the response
+        ctx.header("Last-Modified", String.valueOf(now));
+
         ctx.json(item);
     }
 
     public void update(Context ctx){
         String id = ctx.pathParam("id");
+        // Get the last known modification date of the item
+        LocalDateTime lastKnownModification = ctx.headerAsClass("If-Unmodified-Since", LocalDateTime.class).getOrDefault(null);
+        // Check if the item has been modified since the last known modification date
+        if (lastKnownModification != null && !itemsCache.get(id).equals(lastKnownModification)){
+            throw new PreconditionFailedResponse();
+        }
+
         Item updateItem =
                 ctx.bodyValidator(Item.class)
                         .check(obj -> obj.name != null, "Missing name")
@@ -114,16 +217,43 @@ public class ItemController {
         item.gameVersions = updateItem.gameVersions;
         item.note = updateItem.note;
         items.put(id, item);
+
+        LocalDateTime now;
+        if (itemsCache.containsKey(item.id)) {
+            // If it is already in the cache, get the last modification date
+            now = itemsCache.get(item.id);
+        }else{
+            // Otherwise, set to the current date
+            now = LocalDateTime.now();
+            itemsCache.put(item.id, now);
+
+            // Invalidate the cache for all items
+            itemsCache.remove(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS);
+        }
+        // Add the last modification date to the response
+        ctx.header("Last-Modified", String.valueOf(now));
         ctx.json(item);
     }
 
     public void delete(Context ctx) {
         String id = ctx.pathParam("id");
+        // Get the last known modification date of the item
+        LocalDateTime lastKnownModification = ctx.headerAsClass("If-Unmodified-Since", LocalDateTime.class).getOrDefault(null);
+        // Check if the item has been modified since the last known modification date
+        if (lastKnownModification != null && !itemsCache.get(id).equals(lastKnownModification)){
+            throw new PreconditionFailedResponse();
+        }
+
         Item item = items.get(id);
         if (item == null) {
             throw new NotFoundResponse();
         }
         items.remove(id);
+        // Invalidate the cache for the item
+        itemsCache.remove(id);
+        // Invalidate the cache for all items
+        itemsCache.remove(RESERVED_ID_TO_IDENTIFY_ALL_ITEMS);
+
         ctx.status(HttpStatus.NO_CONTENT);
     }
 }

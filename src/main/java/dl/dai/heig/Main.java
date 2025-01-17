@@ -5,15 +5,11 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import dl.dai.heig.controllers.ItemController;
 import dl.dai.heig.items.Item;
-import dl.dai.heig.items.ItemFilter;
 import io.javalin.Javalin;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
@@ -29,7 +25,8 @@ public class Main {
     try (FileReader file = new FileReader(filename);
         JsonReader reader = new JsonReader(file)) {
       ConcurrentHashMap<String, Item> items = gson.fromJson(reader, mapType);
-      ItemController itemController = new ItemController(items);
+      ConcurrentHashMap<String, LocalDateTime> itemsCache = new ConcurrentHashMap<>();
+      ItemController itemController = new ItemController(items,itemsCache);
 
       app.get("/items", itemController::getMany);
       app.get("/items/quality/{quality}", itemController::filterByQuality);
