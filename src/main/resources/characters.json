@@ -1,0 +1,14 @@
+{
+  "1": {
+    "id": "1",
+    "name": "Isaac",
+    "hearts": "3 red hearts",
+    "damage": 3.5,
+    "shotSpeed": 1.0,
+    "range": 6.5,
+    "speed": 1.0,
+    "luck": 1.0,
+    "startingPickups": "1 bomb",
+    "startingItems": "The D6"
+  }
+}
