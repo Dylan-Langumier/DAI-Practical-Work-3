@@ -72,6 +72,16 @@ public class ItemController {
         ctx.json(filtered.get(keysAsArray.get(d6)));
     }
 
+    public void getRandomOneByQuality(Context ctx) {
+        String quality = ctx.pathParam("quality");
+        Random rand = new Random();
+        int d6 = rand.nextInt(items.size());
+        Map<String, Item> filtered = ItemFilter.filterItems(items, ItemFilter.FilterType.QUALITY, quality);
+        List<String> keysAsArray = new ArrayList<>(filtered.keySet());
+
+        ctx.json(filtered.get(keysAsArray.get(d6)));
+    }
+
     public void getMany(Context ctx) {
         // Get the last known modification date of all items
         LocalDateTime lastKnownModification = ctx.headerAsClass("If-Modified-Since", LocalDateTime.class).getOrDefault(null);

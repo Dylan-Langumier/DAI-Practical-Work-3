@@ -33,6 +33,7 @@ public class Main {
       app.get("/items/pool/{pool}", itemController::filterByPool);
       app.get("/items/d6", itemController::getRandomOne);
       app.get("/items/d6/{pool}", itemController::getRandomOneByPool);
+      app.get("/items/d6/{quality}", itemController::getRandomOneByQuality);
       app.get("/item/{id}", itemController::getOne);
 
       app.post("/items", itemController::create);
