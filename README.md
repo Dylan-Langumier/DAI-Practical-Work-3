@@ -534,7 +534,7 @@ The response body is empty.
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/items
+curl -i -X GET https://localhost:8080/items
 ```
 
 - Result:
@@ -589,7 +589,7 @@ Content-Length: 11150
 
 
 ```bash
-curl -i -X GET http://localhost:8080/items/pool/TreasureRoom
+curl -i -X GET https://localhost:8080/items/pool/TreasureRoom
 ```
 *Example with TreasureRoom Pool*
 - Result:
@@ -624,7 +624,7 @@ Content-Length: 8807
 </details>
 
 ```bash
-curl -i -X GET http://localhost:8080/items/quality/0
+curl -i -X GET https://localhost:8080/items/quality/0
 ```
 *Example with quality 0*
 - Result:
@@ -643,7 +643,7 @@ Content-Length: 221
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/item/c1
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/item/c1
 ```
 *Example with item id c1*
 
@@ -663,7 +663,7 @@ Content-Length: 233
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/items/d6
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/items/d6
 ```
 
 - Result:
@@ -683,7 +683,7 @@ Content-Length: 696
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/items/d6/pool/TreasureRoom
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/items/d6/pool/TreasureRoom
 ```
 *Example with TreasureRoom Pool*
 
@@ -704,7 +704,7 @@ Content-Length: 284
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/items/d6/quality/1
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/items/d6/quality/1
 ```
 *Example with Quality 1*
 
@@ -726,7 +726,7 @@ Content-Length: 387
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/item/spindown/c2
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/item/spindown/c2
 ```
 *Example with item c2*
 
@@ -840,7 +840,7 @@ Content-Length: 233
 curl -i -X POST \
      -H "Content-Type: application/json" \
      -d '{"id":"c90","name":"The Small Rock","type":"Passive","itemPools":["CraneGame"],"statistics":[{"type":"Damage","value": "+1"},{"type":"Speed","value": "-0.2"},{"type":"Tears","value": "+0.2"}],"description": "DMG up + speed down","quality":3,"gameVersions":["Rebirth"],"note": "Has a chance to drop when exploding a tinted rock"}' \
-      http://localhost:8080/items
+      https://tboi.dl-dai-heig.duckdns.org/items
 ```
 *Example create the new item **The Small Rock***
 
@@ -863,7 +863,7 @@ Content-Length: 366
 curl -i -X PATCH \
      -H "Content-Type: application/json" \
      -d '{"name":"The Small Rocks","type":"Passive","itemPools":["CraneGame"],"statistics":[{"type":"Damage","value": "+1"},{"type":"Speed","value": "-0.2"},{"type":"Tears","value": "+0.2"}],"description": "DMG up + speed down","quality":3,"gameVersions":["Rebirth"],"note": "Has a chance to drop when exploding a tinted rock"}' \
-      http://localhost:8080/item/c90
+      https://tboi.dl-dai-heig.duckdns.org/item/c90
 ```
 *Example update the new item The Small Rock change its name to **The Small Rocks***
 
@@ -883,7 +883,7 @@ Content-Length: 367
 - **Command:**
 
 ```bash
-curl -i -X DELETE http://localhost:8080/item/c90
+curl -i -X DELETE https://tboi.dl-dai-heig.duckdns.org/item/c90
 ```
 *Example delete the added item **The Small Rock***
 
@@ -900,7 +900,7 @@ Content-Type: text/plain
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/characters
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/characters
 ```
 
 - Result:
@@ -920,7 +920,7 @@ Content-Length: 167
 - **Command:**
 
 ```bash
-curl -i -X GET http://localhost:8080/character/1
+curl -i -X GET https://tboi.dl-dai-heig.duckdns.org/character/1
 ```
 *Example query the character with the id **1***
 
@@ -945,7 +945,7 @@ Content-Length: 165
 curl -i -X POST \
      -H "Content-Type: application/json" \
      -d '{"id":"2","name":"Azazel","hearts":"3 black hearts","damage":5.25,"shotSpeed":1.0,"range":4.5,"speed":1.25,"luck":0.0,"startingPickups":"0 - The Fool","startingItems":"Short range Brimstone"}' \
-     http://localhost:8080/characters
+     https://tboi.dl-dai-heig.duckdns.org/characters
 ```
 *Example create the character **Azazel***
 
@@ -968,7 +968,7 @@ Content-Length: 191
 curl -i -X PATCH \
      -H "Content-Type: application/json" \
      -d '{"id":"2","name":"Azazel","hearts":"4 black hearts","damage":5.25,"shotSpeed":1.0,"range":4.5,"speed":1.25,"luck":0.0,"startingPickups":"0 - The Fool","startingItems":"Short range Brimstone"}' \
-     http://localhost:8080/character/2
+     https://tboi.dl-dai-heig.duckdns.org/character/2
 ```
 *Example update the added character **Azazel** change 3 heart to 4 heats*
 
@@ -988,7 +988,7 @@ Content-Length: 191
 - **Command:**
 
 ```bash
-curl -i -X DELETE http://localhost:8080/character/2
+curl -i -X DELETE https://tboi.dl-dai-heig.duckdns.org/character/2
 ```
 *Example delete the added character **Azazel***
 
